@@ -1,0 +1,38 @@
+{
+  "name": "tanvite",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "start": "vite start",
+    "deps": "bunx npm-check-updates@latest --interactive --format group",
+    "ngrok": "ngrok http --domain=$(grep -o \"NGROK_DOMAIN=.*\" .env | cut -d= -f2) 3000"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "^0.13.4",
+    "@tailwindcss/vite": "^4.1.6",
+    "@tanstack/react-query": "^5.76.0",
+    "@tanstack/react-query-devtools": "^5.76.0",
+    "@tanstack/react-router": "^1.120.4-alpha.13",
+    "@tanstack/react-start": "^1.120.4-alpha.13",
+    "babel-plugin-react-compiler": "^19.1.0-rc.1",
+    "clsx": "^2.1.1",
+    "eruda": "^3.4.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "superjson": "^2.2.2",
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^4.1.6",
+    "vite": "^6.3.5",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "^5.8.3",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}
