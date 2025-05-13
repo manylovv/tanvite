@@ -64,9 +64,9 @@ function Home() {
       <button
         type="button"
         className="mt-2 block rounded-md bg-neutral-100 px-3 py-2 text-sm text-black ring-1 ring-neutral-200 hover:bg-neutral-200/60"
+        disabled={count === undefined}
         onClick={async () => {
-          if (!count) return;
-          const optimisticData = count + 1;
+          const optimisticData = (count ?? 0) + 1;
           setQueryData(getCount, optimisticData);
           mutate({ data: { sigma: 1 } });
         }}
