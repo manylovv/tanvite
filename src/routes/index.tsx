@@ -1,19 +1,11 @@
 // src/routes/index.tsx
-import { z } from "zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createServerFn } from "@tanstack/react-start";
-import * as fs from "node:fs";
-import { useQueryHelpers } from "~/lib/query";
 import { Suspense, use } from "react";
+import { z } from "zod";
 import { env } from "~/env";
-
-const filePath = "count.txt";
-
-async function readCount() {
-  return parseInt(
-    await fs.promises.readFile(filePath, "utf-8").catch(() => "0"),
-  );
-}
+import { readCount, writeCount } from "~/lib/db";
+import { useQueryHelpers } from "~/lib/query";
 
 const getCount = createServerFn({
   method: "GET",
@@ -30,7 +22,7 @@ const updateCount = createServerFn({ method: "POST" })
   .validator(z.object({ sigma: z.number() }))
   .handler(async ({ data }) => {
     const count = await readCount();
-    await fs.promises.writeFile(filePath, `${count + data.sigma}`);
+    await writeCount(count + data.sigma);
     return count + data.sigma;
   });
 
