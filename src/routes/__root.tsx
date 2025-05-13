@@ -1,4 +1,3 @@
-// src/routes/__root.tsx
 import type { ReactNode } from "react";
 import {
   Outlet,
@@ -6,9 +5,9 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import tailwindLink from "~/global.css?url";
 import { LazyEruda } from "~/lib/eruda/lazy-eruda";
 import { env } from "~/env";
+import "../global.css";
 import { LazyQueryDevtools } from "~/lib/devtools/react-query";
 
 export const Route = createRootRoute({
@@ -25,8 +24,11 @@ export const Route = createRootRoute({
         title: "tanvite",
       },
     ],
-    links: [{ rel: "stylesheet", href: tailwindLink }],
+    links: import.meta.env.DEV
+      ? [{ rel: "stylesheet", href: "/src/global.css" }]
+      : [],
   }),
+
   component: RootComponent,
 });
 
@@ -43,6 +45,8 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     <html>
       <head>
         <HeadContent />
+
+        {/* <link href={"/src/global.css"} rel="stylesheet" /> */}
       </head>
       <body>
         {env.VITE_ERUDA_ENABLED && <LazyEruda />}
